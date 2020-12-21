@@ -5,12 +5,20 @@ import model.bean.HangHoa;
 import model.dao.ShowProductListDAO;
 
 public class ShowProductListBO {
+	ShowProductListDAO showProductListDAO = new ShowProductListDAO();
+	
+//	public ArrayList<HangHoa> getDsHangHoa() {
+//		// TODO Auto-generated method stub	
+//		return showProductListDAO.getDsHangHoa();
+//	}
+	
+	public ArrayList<HangHoa> getDsHangHoa(int pageNumber) {
+		return showProductListDAO.getDsHangHoa(pageNumber);
+	}
 
-	public ArrayList<HangHoa> GetDsHangHoa() {
-		// TODO Auto-generated method stub
-		ShowProductListDAO showProductListDAO = new ShowProductListDAO();
-		
-		return showProductListDAO.getDsHangHoa();
+
+	public int getTotalPageNumber() {
+		return showProductListDAO.getTotalPageNumber();
 	}
 	
 

@@ -76,7 +76,6 @@
 	    			alert(errorMessage);
 	    		}
 	    		
-	    		
 	    		return errorMessage == "";
 	    			
 	    	}

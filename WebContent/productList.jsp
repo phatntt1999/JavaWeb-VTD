@@ -96,8 +96,8 @@
 	   	}  %>  --%> 
 	   	
 	   	
-	   	<% 	int totalPageNumber = 50; //Đang set cứng, sau này sẽ từ server trả về
-	   		int currentPageNumer = 1; //Đang set cứng, sau này sẽ từ server trả về
+	   	<% 	int currentPageNumer = (Integer)request.getAttribute("currentPageNumer"); //Đang set cứng, sau này sẽ từ server trả về
+	   		int totalPageNumber = (Integer)request.getAttribute("totalPageNumber"); //Đang set cứng, sau này sẽ từ server trả về
 	   		
 	   		int[] pageNumberList = new int[10]; //Tự set, client tự tính toán
 	   		int pageQuantity = 0; //Tự tính toán trong lúc xử lý

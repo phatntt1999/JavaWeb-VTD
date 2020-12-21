@@ -52,7 +52,21 @@ public class ShowProductListServlet extends HttpServlet {
 		
 		else {
 			ShowProductListBO showProductListBO = new ShowProductListBO();
-			ArrayList<HangHoa> dsHangHoa = showProductListBO.GetDsHangHoa();
+			//ArrayList<HangHoa> dsHangHoa = showProductListBO.GetDsHangHoa();
+			
+			String page = request.getParameter("page");
+			int pageNumber = 1; //Mặc định trang 1 là trang đầu tiên
+			
+			if(page != null && "".equals(page)) {
+				pageNumber = Integer.valueOf(page);
+			}
+			
+			ArrayList<HangHoa> dsHangHoa = showProductListBO.getDsHangHoa(pageNumber);
+			int totalPageNumber = showProductListBO.getTotalPageNumber();
+			
+			request.setAttribute("dsHangHoa", dsHangHoa);
+			request.setAttribute("currentPageNumer", pageNumber);
+			request.setAttribute("totalPageNumber", totalPageNumber);
 			
 			RequestDispatcher rd = null;
 			request.setAttribute("dsHangHoa", dsHangHoa);
