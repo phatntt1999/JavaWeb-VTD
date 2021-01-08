@@ -55,11 +55,16 @@ public class ShowProductListServlet extends HttpServlet {
 			//ArrayList<HangHoa> dsHangHoa = showProductListBO.GetDsHangHoa();
 			
 			String page = request.getParameter("page");
+			System.out.print("\npage = ");
+	   		System.out.print(page);
 			int pageNumber = 1; //Mặc định trang 1 là trang đầu tiên
 			
-			if(page != null && "".equals(page)) {
+			if(page != null && !"".equals(page)) {
 				pageNumber = Integer.valueOf(page);
 			}
+			
+			System.out.print("\npageNumber = ");
+	   		System.out.print(pageNumber);
 			
 			ArrayList<HangHoa> dsHangHoa = showProductListBO.getDsHangHoa(pageNumber);
 			int totalPageNumber = showProductListBO.getTotalPageNumber();

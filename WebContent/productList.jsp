@@ -34,10 +34,75 @@
        
 	   <%-- Logic handling show product list --%>
 	   <% ArrayList<HangHoa> dsHangHoa = (ArrayList<HangHoa>)request.getAttribute("dsHangHoa"); %>
-	   <% int stt = 1; %>
+	   
 	   
 	   <input type="button" onclick="location.href='ShowCreateProductServlet'" value="Tạo mới" />
 	   
+	   
+	   <%-- Separate page --%>
+	   <% 	int currentPageNumer = (Integer)request.getAttribute("currentPageNumer"); //Dữ liệu được trả từ server trả về
+	   		int totalPageNumber = (Integer)request.getAttribute("totalPageNumber"); //Dữ liệu được trả từ server trả về
+	   		
+	   		System.out.print("currentPageNumer");
+	   		System.out.print(currentPageNumer);
+	   		
+	   		System.out.print("totalPageNumber");
+	   		System.out.print(totalPageNumber);
+	   		
+	   		
+	   		
+	   		int[] pageNumberList = new int[10]; //Tự set, client tự tính toán
+	   		int pageQuantity = 0; //Tự tính toán trong lúc xử lý
+	   		
+	   		if(totalPageNumber <= 10){
+	   			for (int j = 0; j < 10; j++){
+	   				pageNumberList[j] = j + 1;
+	   				pageQuantity++;
+	   			}
+	   		}
+	   		
+	   		if (totalPageNumber > 10 && currentPageNumer <= 4) {
+	      	  for (int j = 0; j < 10; j++) {
+	      		  pageNumberList[j] = j + 1;
+	      		  pageQuantity++;
+	      	  }
+	        }
+	   		
+	   		if (totalPageNumber > 10 && currentPageNumer >= totalPageNumber - 5){
+	   			for (int j = 10; j > 0; j--){
+	   				pageNumberList[10-j] = totalPageNumber - (j - 1);
+	   				pageQuantity++;
+	   			}
+	   		}
+	   		
+	   		if	(totalPageNumber > 10 && currentPageNumer >= 5 && currentPageNumer <= (totalPageNumber - 5)){
+	   			for(int j = 0; j < 10; j++){
+	   				pageNumberList[j] = currentPageNumer - 3 + j;
+	   				pageQuantity++;
+	   			}	
+	   		}
+	   	%>
+	   	<% 	if(currentPageNumer > 1){ %>
+	   			<a href='ShowProductListServlet?page=1'>First</a>
+	   			<a href='ShowProductListServlet?page=<%=currentPageNumer-1%>'>Previous</a>
+	   	<% 	} 
+		
+	  	for(int k = 0; k < pageQuantity; k++)	{ 
+	   			if	(pageNumberList[k] == currentPageNumer) { %>
+	   			<a href='ShowProductListServlet?page=<%=pageNumberList[k]%>'><b><%=pageNumberList[k]%></b></a>
+	   	<%} else { %>
+	   			<a href='ShowProductListServlet?page=<%=pageNumberList[k]%>'><%=pageNumberList[k]%></a>
+	   	<%	} 
+	   	} 	%>
+	   	
+	   	<% if (currentPageNumer < totalPageNumber) { %>
+		      <a href='ShowProductListServlet?page=<%=currentPageNumer+1%>'>Next</a>
+		      <a href='ShowProductListServlet?page=<%=totalPageNumber%>'>Last</a>
+   		<% } %>
+   		
+   		<%-- //End Separate page --%>
+   		
+	   <% int stt = (currentPageNumer - 1)*20 + 1; // 20 là số dòng trên 1 trang %>
 	   <table border="1">
 	      <tr>
 	         <th>STT</th>
@@ -95,60 +160,6 @@
 	   <% 	} 
 	   	}  %>  --%> 
 	   	
-	   	
-	   	<% 	int currentPageNumer = (Integer)request.getAttribute("currentPageNumer"); //Đang set cứng, sau này sẽ từ server trả về
-	   		int totalPageNumber = (Integer)request.getAttribute("totalPageNumber"); //Đang set cứng, sau này sẽ từ server trả về
-	   		
-	   		int[] pageNumberList = new int[10]; //Tự set, client tự tính toán
-	   		int pageQuantity = 0; //Tự tính toán trong lúc xử lý
-	   		
-	   		if(totalPageNumber <= 10){
-	   			for (int j = 0; j < 10; j++){
-	   				pageNumberList[j] = j + 1;
-	   				pageQuantity++;
-	   			}
-	   		}
-	   		
-	   		if (totalPageNumber > 10 && currentPageNumer <= 4) {
-	      	  for (int j = 0; j < 10; j++) {
-	      		  pageNumberList[j] = j + 1;
-	      		  pageQuantity++;
-	      	  }
-	        }
-	   		
-	   		if (totalPageNumber > 10 && currentPageNumer >= totalPageNumber - 5){
-	   			for (int j = 10; j > 0; j--){
-	   				pageNumberList[10-j] = totalPageNumber - (j - 1);
-	   				pageQuantity++;
-	   			}
-	   		}
-	   		
-	   		if	(totalPageNumber > 10 && currentPageNumer >= 5 && currentPageNumer <= (totalPageNumber - 5)){
-	   			for(int j = 0; j < 10; j++){
-	   				pageNumberList[j] = currentPageNumer - 3 + j;
-	   				pageQuantity++;
-	   			}
-	   				
-	   		}
-	   		%>
-	   	<% 	if(currentPageNumer > 1){ %>
-	   			<a href='ShowProductListServlet?page=1'>First</a>
-	   			<a href='ShowProductListServlet?page=<%=currentPageNumer-1%>'>Previous</a>
-	   	<% 	}
-		
-	  	for(int k = 0; k < pageQuantity; k++)	{ 
-	   			if	(pageNumberList[k] == currentPageNumer) { %>
-	   			<a href='ShowProductListServlet?page=<%=pageNumberList[k]%>'><b><%=pageNumberList[k]%></b></a>
-	   	<%} else { %>
-	   			<a href='ShowProductListServlet?page=<%=pageNumberList[k]%>'><%=pageNumberList[k]%></a>
-	   	<%	} 
-	   	} 	%>
-	   	
-	   	<% if (currentPageNumer < totalPageNumber) { %>
-		      <a href='ShowProductListServlet?page=<%=currentPageNumer+1%>'>Next</a>
-		      <a href='ShowProductListServlet?page=<%=totalPageNumber%>'>Last</a>
-   		<% } %>
-	   
 	   <%-- //End Separate page --%>
 	   
 	   <div style="background-color: yellow; width: 100px"><a href="LogoutServlet">Đăng xuất</a></div>
