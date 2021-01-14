@@ -5,6 +5,7 @@ encoding//src/controller/CreateProductServlet.java=UTF-8
 encoding//src/controller/EditProductServlet.java=UTF-8
 encoding//src/controller/ShowProductListServlet.java=UTF-8
 encoding//src/model/bo/CreateProductBO.java=UTF-8
+encoding//src/model/bo/ShowProductListBO.java=UTF-8
 encoding//src/model/dao/BaseDAO.java=UTF-8
 encoding//src/model/dao/CreateProductDAO.java=UTF-8
 encoding//src/model/dao/EditProductDAO.java=UTF-8

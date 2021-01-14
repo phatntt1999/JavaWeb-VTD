@@ -38,6 +38,11 @@
 	   
 	   <input type="button" onclick="location.href='ShowCreateProductServlet'" value="Tạo mới" />
 	   
+	   <% String searchText = request.getParameter("searchText") != null ? request.getParameter("searchText") : ""; %>
+	   <form action="SearchProductServlet" method="post">
+	   		<input type="text" name="searchText" value="<%=searchText%>"/>
+	   		<input type="submit" name="Search" />
+	   </form>
 	   
 	   <%-- Separate page --%>
 	   <% 	int currentPageNumer = (Integer)request.getAttribute("currentPageNumer"); //Dữ liệu được trả từ server trả về
@@ -55,7 +60,7 @@
 	   		int pageQuantity = 0; //Tự tính toán trong lúc xử lý
 	   		
 	   		if(totalPageNumber <= 10){
-	   			for (int j = 0; j < 10; j++){
+	   			for (int j = 0; j < 10 && j < totalPageNumber; j++){
 	   				pageNumberList[j] = j + 1;
 	   				pageQuantity++;
 	   			}
