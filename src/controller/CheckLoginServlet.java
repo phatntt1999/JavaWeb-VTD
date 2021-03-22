@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,7 +49,7 @@ public class CheckLoginServlet extends HttpServlet {
 		
 		final int INVALID_ACCOUNT = 0;
 		final int ADMIN_ACCOUNT = 1;
-		final int EMPLOYEE_ACCOUNT = 2;
+		//final int EMPLOYEE_ACCOUNT = 2;
 		
 		String accountInfor = null;
 		HttpSession session = request.getSession();

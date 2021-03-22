@@ -23,7 +23,6 @@ public class ShowProductListDAO extends BaseDAO {
 			rs = pstmt.executeQuery();
 			
 			HangHoa item = null;
-			rs.next();
 			
 			while(rs.next())
 			{

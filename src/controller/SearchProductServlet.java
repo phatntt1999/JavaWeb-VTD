@@ -39,17 +39,45 @@ public class SearchProductServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+//		request.setCharacterEncoding("UTF-8");
+//		response.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html; charset=UTF-8");
+//		
+//		String searchText = request.getParameter("searchText");
+//		SearchProductBO searchProductBo = new SearchProductBO();
+//		ArrayList<HangHoa> dsHangHoa = searchProductBo.getDsHangHoa(searchText);
+//		
+//		request.setAttribute("dsHangHoa", dsHangHoa);
+//		RequestDispatcher rd = request.getRequestDispatcher("productList.jsp");
+//		rd.forward(request, response);
+		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
 		String searchText = request.getParameter("searchText");
-		SearchProductBO searchProductBo = new SearchProductBO();
-		ArrayList<HangHoa> dsHangHoa = searchProductBo.getDsHangHoa(searchText);
+		SearchProductBO searchProductBO = new SearchProductBO();
 		
+		System.out.println("searchText=" + searchText);
+		
+		String page = request.getParameter("page");
+		int pageNumber = 1; // Mặc định là trang 1, trang đầu tiên
+		
+		if (page != null && !"".equals(page)) {
+			pageNumber = Integer.valueOf(page);
+		}
+		
+		ArrayList<HangHoa> dsHangHoa = searchProductBO.getDsHangHoa(searchText, pageNumber);
+        int totalPageNumber = searchProductBO.getTotalPageNumber(searchText);
+		 
 		request.setAttribute("dsHangHoa", dsHangHoa);
-		RequestDispatcher rd = request.getRequestDispatcher("productList.jsp");
+		request.setAttribute("currentPageNumer", pageNumber);
+		request.setAttribute("totalPageNumber", totalPageNumber);
+		
+		RequestDispatcher rd = request
+				.getRequestDispatcher("productList.jsp");
 		rd.forward(request, response);
+
 	}
 
 }

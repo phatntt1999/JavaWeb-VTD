@@ -47,7 +47,7 @@ public class ShowEditProductServlet extends HttpServlet {
 		
 		HangHoa hangHoa = editProductBO.getProductInfor(proId);
 		request.setAttribute("hangHoa", hangHoa);
-		
+		 
 		RequestDispatcher rd = null;
 		rd = request.getRequestDispatcher("editProduct.jsp");
 		rd.forward(request, response);
